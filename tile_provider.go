@@ -32,6 +32,17 @@ func NewTileProviderOpenStreetMaps() *TileProvider {
 	return t
 }
 
+// NewTileProviderWOWA creates a TileProvider struct for maps.wowa.ca
+func NewTileProviderWOWA() *TileProvider {
+	t := new(TileProvider)
+	t.Name = "osm"
+	t.Attribution = "Maps and Data (c) openstreetmap.org and contributors, ODbL"
+	t.TileSize = 256
+	t.URLPattern = "https://maps.wowa.ca/styles/production/%[1]d/%[2]d/%[3]d.png"
+	t.Shards = []string{"a", "b", "c"}
+	return t
+}
+
 func newTileProviderThunderforest(name string) *TileProvider {
 	t := new(TileProvider)
 	t.Name = fmt.Sprintf("thunderforest-%s", name)
@@ -161,6 +172,7 @@ func GetTileProviders() map[string]*TileProvider {
 		NewTileProviderCartoLight(),
 		NewTileProviderCartoDark(),
 		NewTileProviderArcgisWorldImagery(),
+		NewTileProviderWOWA(),
 	}
 
 	for _, tp := range list {
